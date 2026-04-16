@@ -252,6 +252,125 @@
       transform: translateY(-2px);
     }
 
+    .reaction-chamber {
+      position: relative;
+      min-height: 240px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(153, 236, 255, 0.14);
+      background:
+        radial-gradient(circle at 50% 48%, rgba(111, 197, 255, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(5, 24, 36, 0.95), rgba(3, 14, 22, 0.98));
+    }
+
+    .chamber-core {
+      position: absolute;
+      inset: 26% 26%;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(134, 255, 210, 0.12), transparent 68%);
+      opacity: 0.5;
+      transition: transform 350ms ease, opacity 350ms ease;
+    }
+
+    .reaction-stage.active .chamber-core {
+      transform: scale(1.18);
+      opacity: 1;
+    }
+
+    .particle {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 98px;
+      height: 98px;
+      border-radius: 999px;
+      text-align: center;
+      padding: 0.8rem;
+      line-height: 1.2;
+      border: 1px solid rgba(153, 236, 255, 0.18);
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.18), rgba(7, 36, 52, 0.95));
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+      transition: transform 850ms ease, opacity 850ms ease, box-shadow 300ms ease;
+    }
+
+    .particle-name {
+      display: block;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .particle-sub {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .particle-luciferin { top: 24px; left: 20px; }
+    .particle-oxygen { top: 118px; left: 62px; width: 84px; height: 84px; }
+    .particle-enzyme { top: 78px; right: 18px; width: 112px; height: 112px; }
+
+    .reaction-stage.active .particle-luciferin { transform: translate(126px, 56px) scale(1.08); }
+    .reaction-stage.active .particle-oxygen { transform: translate(118px, -18px) scale(1.1); }
+    .reaction-stage.active .particle-enzyme { transform: translate(-138px, -6px) scale(1.05); }
+
+    .mix-label {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #06252d;
+      background: linear-gradient(90deg, rgba(111, 197, 255, 0.9), rgba(134, 255, 210, 0.9));
+      opacity: 0;
+      transition: opacity 250ms ease 220ms, transform 250ms ease 220ms;
+    }
+
+    .reaction-stage.active .mix-label {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    .spark-burst {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .spark {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(255, 227, 108, 0.7), transparent 75%);
+      opacity: 0;
+      transform: translate(0, 0) scale(0.4);
+    }
+
+    .reaction-stage.active .spark {
+      animation: sparkOut 900ms ease forwards;
+    }
+
+    .reaction-stage.active .spark:nth-child(2) { animation-delay: 60ms; }
+    .reaction-stage.active .spark:nth-child(3) { animation-delay: 120ms; }
+    .reaction-stage.active .spark:nth-child(4) { animation-delay: 180ms; }
+    .reaction-stage.active .spark:nth-child(5) { animation-delay: 240ms; }
+    .reaction-stage.active .spark:nth-child(6) { animation-delay: 300ms; }
+
+    .spark-1 { --tx: -82px; --ty: -54px; }
+    .spark-2 { --tx: 86px; --ty: -42px; }
+    .spark-3 { --tx: -96px; --ty: 48px; }
+    .spark-4 { --tx: 94px; --ty: 54px; }
+    .spark-5 { --tx: 0px; --ty: -92px; }
+    .spark-6 { --tx: 0px; --ty: 96px; }
+
     .reaction-row {
       display: flex;
       flex-wrap: wrap;
@@ -359,6 +478,20 @@
       100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 227, 108, 0); }
     }
 
+    @keyframes sparkOut {
+      0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.3);
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(1.5);
+      }
+    }
+
     @media (max-width: 980px) {
       .hero, .content-grid { grid-template-columns: 1fr; }
       .hero-visual { min-height: 220px; }
@@ -414,6 +547,36 @@
           <h2>How the glow happens</h2>
         </div>
         <div id="reaction-stage" class="reaction-stage">
+          <div class="reaction-chamber" aria-hidden="true">
+            <div class="chamber-core"></div>
+            <div class="particle particle-luciferin">
+              <div>
+                <span class="particle-name">Luciferin</span>
+                <span class="particle-sub">fuel</span>
+              </div>
+            </div>
+            <div class="particle particle-oxygen">
+              <div>
+                <span class="particle-name">O2</span>
+                <span class="particle-sub">oxygen</span>
+              </div>
+            </div>
+            <div class="particle particle-enzyme">
+              <div>
+                <span class="particle-name">Luciferase</span>
+                <span class="particle-sub">enzyme</span>
+              </div>
+            </div>
+            <div class="mix-label">mixing</div>
+            <div class="spark-burst">
+              <div class="spark spark-1"></div>
+              <div class="spark spark-2"></div>
+              <div class="spark spark-3"></div>
+              <div class="spark spark-4"></div>
+              <div class="spark spark-5"></div>
+              <div class="spark spark-6"></div>
+            </div>
+          </div>
           <div class="reaction-row reactants">
             <div class="molecule">
               <span class="molecule-name">Luciferin</span>
