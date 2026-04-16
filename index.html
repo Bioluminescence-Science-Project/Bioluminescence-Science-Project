@@ -112,6 +112,122 @@
       align-items: center;
     }
 
+    .hero-demo {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .hero-animal {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.8rem 1rem;
+      border-radius: 18px;
+      background: rgba(4, 22, 32, 0.82);
+      border: 1px solid rgba(153, 236, 255, 0.14);
+      min-width: 220px;
+    }
+
+    .hero-animal-emoji {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.28), rgba(111, 197, 255, 0.16));
+    }
+
+    .hero-animal-label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-animal-name {
+      display: block;
+      font-weight: 700;
+    }
+
+    .hero-animal-use {
+      display: block;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .magnifier-card {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.8rem 1rem;
+      border-radius: 18px;
+      background: rgba(4, 22, 32, 0.82);
+      border: 1px solid rgba(153, 236, 255, 0.14);
+    }
+
+    .magnifier {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      border-radius: 999px;
+      border: 4px solid rgba(235, 255, 251, 0.88);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.95), rgba(255, 227, 108, 0.75) 20%, rgba(111, 197, 255, 0.55) 45%, rgba(5, 28, 40, 0.85) 72%);
+      box-shadow: inset 0 0 28px rgba(255, 255, 255, 0.1), 0 0 28px rgba(111, 197, 255, 0.2);
+      overflow: hidden;
+    }
+
+    .magnifier::after {
+      content: "";
+      position: absolute;
+      width: 44px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(235, 255, 251, 0.95), rgba(134, 255, 210, 0.7));
+      right: -26px;
+      bottom: 10px;
+      transform: rotate(42deg);
+      transform-origin: left center;
+      box-shadow: 0 0 14px rgba(134, 255, 210, 0.2);
+    }
+
+    .magnifier-glow {
+      position: absolute;
+      inset: 18%;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(255, 227, 108, 0.82) 18%, rgba(111, 197, 255, 0.45) 42%, transparent 72%);
+      animation: magnifyPulse 2.6s ease-in-out infinite;
+    }
+
+    .magnifier-specks {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 35% 36%, rgba(255, 255, 255, 0.9) 0 3px, transparent 4px),
+        radial-gradient(circle at 60% 52%, rgba(134, 255, 210, 0.9) 0 4px, transparent 5px),
+        radial-gradient(circle at 46% 66%, rgba(255, 227, 108, 0.9) 0 2px, transparent 3px);
+      filter: blur(0.4px);
+    }
+
+    .magnifier-copy strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .magnifier-copy span {
+      display: block;
+      color: var(--muted);
+      max-width: 18ch;
+      line-height: 1.4;
+      font-size: 0.88rem;
+    }
+
     .primary-btn {
       border: 0;
       border-radius: 999px;
@@ -523,6 +639,11 @@
       50% { transform: translate(10px, -8px) scale(1.03); }
     }
 
+    @keyframes magnifyPulse {
+      0%, 100% { transform: scale(0.88); opacity: 0.8; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+
     @keyframes flare {
       0% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 227, 108, 0); }
       50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 227, 108, 0.45); }
@@ -596,6 +717,26 @@
             <span>Auto pulse</span>
             <input id="auto-pulse" type="checkbox" checked>
           </label>
+        </div>
+        <div class="hero-demo">
+          <div class="hero-animal">
+            <div id="hero-animal-emoji" class="hero-animal-emoji" aria-hidden="true">🪲</div>
+            <div>
+              <span class="hero-animal-label">Main Example</span>
+              <span id="hero-animal-name" class="hero-animal-name">Firefly</span>
+              <span id="hero-animal-use" class="hero-animal-use">communication</span>
+            </div>
+          </div>
+          <div class="magnifier-card">
+            <div class="magnifier" aria-hidden="true">
+              <div class="magnifier-glow"></div>
+              <div class="magnifier-specks"></div>
+            </div>
+            <div class="magnifier-copy">
+              <strong>Magnified light</strong>
+              <span id="magnifier-copy">A close-up look at the glow this animal makes.</span>
+            </div>
+          </div>
         </div>
       </div>
       <div id="hero-visual" class="hero-visual" aria-hidden="true">
@@ -770,6 +911,10 @@
     const animalDescription = document.getElementById("animal-description");
     const animalColor = document.getElementById("animal-color");
     const animalUse = document.getElementById("animal-use");
+    const heroAnimalEmoji = document.getElementById("hero-animal-emoji");
+    const heroAnimalName = document.getElementById("hero-animal-name");
+    const heroAnimalUse = document.getElementById("hero-animal-use");
+    const magnifierCopy = document.getElementById("magnifier-copy");
     const reactionCaption = document.getElementById("reaction-caption");
     const reactionArrow = document.getElementById("reaction-arrow");
     const reactionStage = document.getElementById("reaction-stage");
@@ -819,6 +964,10 @@
       animalDescription.textContent = animal.description;
       animalColor.textContent = animal.color;
       animalUse.textContent = animal.use;
+      heroAnimalEmoji.textContent = animal.emoji;
+      heroAnimalName.textContent = animal.name;
+      heroAnimalUse.textContent = animal.use;
+      magnifierCopy.textContent = "Zoomed-in " + animal.color + " glow used for " + animal.use + ".";
       reactionCaption.textContent = animal.caption;
 
       document.querySelectorAll(".animal-card").forEach((card) => {
