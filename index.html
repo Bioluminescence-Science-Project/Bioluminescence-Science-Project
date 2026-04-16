@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bioluminescence Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">GitHub Pages Science Project</p>
+        <h1>Bioluminescence Explorer</h1>
+        <p class="intro">
+          Watch how living things make light. Select an animal to see how
+          <span class="formula-inline">luciferin + O2 + luciferase</span>
+          can produce a glowing signal in the ocean, forest, or night sky.
+        </p>
+        <div class="hero-actions">
+          <button id="trigger-reaction" class="primary-btn">Trigger Reaction</button>
+          <label class="toggle">
+            <span>Auto pulse</span>
+            <input id="auto-pulse" type="checkbox" checked>
+          </label>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="orb orb-three"></div>
+        <div class="hero-glow"></div>
+      </div>
+    </header>
+
+    <main class="content-grid">
+      <section class="panel animal-panel">
+        <div class="panel-heading">
+          <p class="section-tag">Choose an organism</p>
+          <h2>Light-makers</h2>
+        </div>
+        <div id="animal-list" class="animal-list" role="tablist" aria-label="Bioluminescent animals"></div>
+      </section>
+
+      <section class="panel reaction-panel">
+        <div class="panel-heading">
+          <p class="section-tag">Chemical reaction</p>
+          <h2>How the glow happens</h2>
+        </div>
+        <div class="reaction-stage">
+          <div class="reaction-row reactants">
+            <div class="molecule">
+              <span class="molecule-name">Luciferin</span>
+              <span class="molecule-role">fuel molecule</span>
+            </div>
+            <span class="plus">+</span>
+            <div class="molecule">
+              <span class="molecule-name">O2</span>
+              <span class="molecule-role">oxygen</span>
+            </div>
+            <span class="plus">+</span>
+            <div class="molecule">
+              <span class="molecule-name">Luciferase</span>
+              <span class="molecule-role">enzyme</span>
+            </div>
+          </div>
+          <div class="arrow-wrap">
+            <div id="reaction-arrow" class="reaction-arrow">energy release</div>
+          </div>
+          <div class="reaction-row products">
+            <div class="molecule product">
+              <span class="molecule-name">Oxyluciferin</span>
+              <span class="molecule-role">excited product</span>
+            </div>
+            <span class="plus">+</span>
+            <div class="molecule product">
+              <span class="molecule-name">Light</span>
+              <span class="molecule-role">visible glow</span>
+            </div>
+          </div>
+        </div>
+        <div id="reaction-caption" class="reaction-caption"></div>
+      </section>
+
+      <section class="panel detail-panel">
+        <div class="panel-heading">
+          <p class="section-tag">Selected organism</p>
+          <h2 id="animal-name">Firefly</h2>
+        </div>
+        <div class="detail-card">
+          <div class="detail-top">
+            <div class="animal-emoji" id="animal-emoji" aria-hidden="true">✨</div>
+            <div>
+              <p id="animal-habitat" class="meta-line"></p>
+              <p id="animal-purpose" class="meta-line"></p>
+            </div>
+          </div>
+          <p id="animal-description" class="detail-text"></p>
+          <div class="fact-strip">
+            <div class="fact-box">
+              <span class="fact-label">Glow color</span>
+              <span id="animal-color" class="fact-value"></span>
+            </div>
+            <div class="fact-box">
+              <span class="fact-label">Main use</span>
+              <span id="animal-use" class="fact-value"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
