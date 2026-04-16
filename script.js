@@ -63,11 +63,15 @@ const animalColor = document.getElementById("animal-color");
 const animalUse = document.getElementById("animal-use");
 const reactionCaption = document.getElementById("reaction-caption");
 const reactionArrow = document.getElementById("reaction-arrow");
+const reactionStage = document.getElementById("reaction-stage");
+const lightProduct = document.getElementById("light-product");
+const heroVisual = document.getElementById("hero-visual");
 const triggerButton = document.getElementById("trigger-reaction");
 const autoPulseToggle = document.getElementById("auto-pulse");
 
 let selectedAnimalId = "firefly";
 let autoPulseInterval = null;
+let reactionTimeout = null;
 
 function renderAnimalButtons() {
   animalList.innerHTML = "";
@@ -120,9 +124,31 @@ function updateSelectedAnimal() {
 
 function triggerReaction() {
   reactionArrow.classList.remove("active");
+  reactionStage.classList.remove("active");
+  lightProduct.classList.remove("active");
+  heroVisual.classList.remove("active");
+  triggerButton.classList.remove("active");
+
   window.requestAnimationFrame(() => {
     reactionArrow.classList.add("active");
+    reactionStage.classList.add("active");
+    lightProduct.classList.add("active");
+    heroVisual.classList.add("active");
+    triggerButton.classList.add("active");
+    triggerButton.textContent = "Reaction Triggered";
   });
+
+  if (reactionTimeout) {
+    window.clearTimeout(reactionTimeout);
+  }
+
+  reactionTimeout = window.setTimeout(() => {
+    reactionStage.classList.remove("active");
+    lightProduct.classList.remove("active");
+    heroVisual.classList.remove("active");
+    triggerButton.classList.remove("active");
+    triggerButton.textContent = "Trigger Reaction";
+  }, 1000);
 }
 
 function syncAutoPulse() {
