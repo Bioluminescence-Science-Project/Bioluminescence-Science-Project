@@ -115,29 +115,37 @@
     .hero-demo {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
+      align-items: stretch;
       gap: 1rem;
       margin-top: 1.25rem;
     }
 
     .hero-animal {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      padding: 0.8rem 1rem;
+      appearance: none;
+      display: grid;
+      gap: 0.35rem;
+      align-content: start;
+      padding: 0.95rem 1rem;
       border-radius: 18px;
-      background: rgba(4, 22, 32, 0.82);
+      background: linear-gradient(180deg, rgba(8, 31, 43, 0.92), rgba(3, 18, 28, 0.9));
       border: 1px solid rgba(153, 236, 255, 0.14);
-      min-width: 220px;
+      min-width: 250px;
       cursor: pointer;
       transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      text-align: left;
+      color: var(--text);
     }
 
     .hero-animal:hover,
     .hero-animal:focus-visible {
       transform: translateY(-2px);
       border-color: rgba(134, 255, 210, 0.5);
-      background: rgba(6, 28, 40, 0.94);
+      background: linear-gradient(180deg, rgba(10, 38, 52, 0.98), rgba(4, 23, 33, 0.94));
+    }
+
+    .hero-animal.active {
+      border-color: rgba(255, 227, 108, 0.52);
+      box-shadow: 0 0 0 1px rgba(255, 227, 108, 0.15), 0 16px 28px rgba(0, 0, 0, 0.2);
     }
 
     .hero-animal-label {
@@ -160,14 +168,23 @@
       font-size: 0.88rem;
     }
 
+    .hero-animal-hint {
+      display: block;
+      margin-top: 0.25rem;
+      color: rgba(235, 255, 251, 0.76);
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
     .magnifier-card {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      padding: 0.8rem 1rem;
+      display: grid;
+      align-content: start;
+      gap: 0.55rem;
+      padding: 0.95rem 1rem;
       border-radius: 18px;
-      background: rgba(4, 22, 32, 0.82);
+      background: linear-gradient(180deg, rgba(8, 31, 43, 0.92), rgba(3, 18, 28, 0.9));
       border: 1px solid rgba(153, 236, 255, 0.14);
+      max-width: 280px;
     }
 
     .magnifier {
@@ -222,7 +239,6 @@
     .magnifier-copy span {
       display: block;
       color: var(--muted);
-      max-width: 18ch;
       line-height: 1.4;
       font-size: 0.88rem;
     }
@@ -263,11 +279,12 @@
 
     .hero-visual {
       position: relative;
-      min-height: 280px;
+      min-height: 320px;
       border-radius: 24px;
       background:
-        radial-gradient(circle at 50% 55%, rgba(134, 255, 210, 0.22), transparent 26%),
-        linear-gradient(180deg, rgba(7, 50, 70, 0.85), rgba(2, 12, 18, 0.35));
+        radial-gradient(circle at 24% 18%, rgba(91, 181, 207, 0.16), transparent 24%),
+        radial-gradient(circle at 70% 48%, rgba(134, 255, 210, 0.12), transparent 24%),
+        linear-gradient(180deg, rgba(8, 44, 61, 0.92), rgba(2, 11, 18, 0.62));
       transition: box-shadow 200ms ease, transform 200ms ease;
       overflow: hidden;
     }
@@ -286,6 +303,25 @@
       inset: 18%;
       background: radial-gradient(circle, rgba(111, 197, 255, 0.35) 0%, rgba(134, 255, 210, 0.1) 45%, transparent 70%);
       animation: drift 8s ease-in-out infinite;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 22%),
+        radial-gradient(circle at 72% 12%, rgba(255,255,255,0.09), transparent 18%);
+      pointer-events: none;
+    }
+
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 42%;
+      background: linear-gradient(180deg, transparent, rgba(2, 8, 13, 0.72));
+      pointer-events: none;
     }
 
     .orb {
@@ -408,6 +444,13 @@
       animation: lureGlow 2.4s ease-in-out infinite;
     }
 
+    .angler-focus {
+      left: 7%;
+      top: 3%;
+      width: 34px;
+      height: 34px;
+    }
+
     .magnifier-stage {
       position: absolute;
       right: 8%;
@@ -420,6 +463,30 @@
         radial-gradient(circle at 42% 44%, rgba(255, 255, 255, 0.96), rgba(255, 227, 108, 0.8) 14%, rgba(111, 197, 255, 0.6) 30%, rgba(5, 28, 40, 0.22) 62%),
         rgba(7, 39, 56, 0.38);
       box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.1), 0 0 30px rgba(111, 197, 255, 0.18);
+    }
+
+    .focus-target {
+      transition: transform 220ms ease, box-shadow 220ms ease, opacity 220ms ease, filter 220ms ease;
+    }
+
+    .hero-visual.focus-mode .active .focus-target {
+      transform: scale(1.18);
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.3), 0 0 42px rgba(255, 227, 108, 0.42), 0 0 74px rgba(111, 197, 255, 0.22);
+    }
+
+    .focus-halo {
+      position: absolute;
+      border: 1px dashed rgba(255, 227, 108, 0.72);
+      border-radius: 999px;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 220ms ease, transform 220ms ease;
+      box-shadow: 0 0 24px rgba(255, 227, 108, 0.18);
+    }
+
+    .hero-visual.focus-mode .active .focus-halo {
+      opacity: 1;
+      transform: scale(1.04);
     }
 
     .magnifier-stage::after {
@@ -520,6 +587,13 @@
       animation: lureGlow 2.2s ease-in-out infinite;
     }
 
+    .firefly-focus {
+      left: 42.5%;
+      top: 47.6%;
+      width: 38px;
+      height: 38px;
+    }
+
     .firefly-magnifier,
     .jellyfish-magnifier,
     .glowworm-magnifier {
@@ -572,6 +646,13 @@
       animation: lureGlow 2.6s ease-in-out infinite;
     }
 
+    .jellyfish-focus {
+      left: 28%;
+      top: 40%;
+      width: 96px;
+      height: 96px;
+    }
+
     .jellyfish-tentacle {
       position: absolute;
       width: 4px;
@@ -616,6 +697,13 @@
       border-radius: 999px;
       background: linear-gradient(180deg, #d5ff97, #79b778);
       box-shadow: 0 0 24px rgba(182, 255, 158, 0.38);
+    }
+
+    .glowworm-focus {
+      left: 18.5%;
+      top: 38.5%;
+      width: 48px;
+      height: 48px;
     }
 
     .glow-thread {
@@ -1088,11 +1176,10 @@
         </div>
         <div class="hero-demo">
           <button id="hero-animal-button" class="hero-animal" type="button">
-            <div>
-              <span class="hero-animal-label">Main Example</span>
-              <span id="hero-animal-name" class="hero-animal-name">Angler Fish</span>
-              <span id="hero-animal-use" class="hero-animal-use">uses a glowing lure to attract prey</span>
-            </div>
+            <span class="hero-animal-label">Main Example</span>
+            <span id="hero-animal-name" class="hero-animal-name">Angler Fish</span>
+            <span id="hero-animal-use" class="hero-animal-use">uses a glowing lure to attract prey</span>
+            <span id="hero-animal-hint" class="hero-animal-hint">Click to highlight the bioluminescent organ in this specimen view.</span>
           </button>
           <div class="magnifier-card">
             <div class="magnifier-copy">
@@ -1115,7 +1202,8 @@
             <div class="angler-mouth"></div>
             <div class="angler-eye"></div>
             <div class="angler-lure-stem"></div>
-            <div class="angler-lure"></div>
+            <div class="angler-lure focus-target"></div>
+            <div class="focus-halo angler-focus"></div>
           </div>
           <div class="magnifier-stage">
             <div class="magnifier-rings"></div>
@@ -1128,7 +1216,8 @@
           <div class="firefly-wing right"></div>
           <div class="firefly-head"></div>
           <div class="firefly-body"></div>
-          <div class="firefly-glow"></div>
+          <div class="firefly-glow focus-target"></div>
+          <div class="focus-halo firefly-focus"></div>
           <div class="firefly-magnifier">
             <div class="magnifier-rings"></div>
             <div class="magnifier-dot firefly"></div>
@@ -1137,7 +1226,8 @@
         </div>
         <div id="jellyfish-demo" class="jellyfish-demo">
           <div class="jellyfish-bell"></div>
-          <div class="jellyfish-glow"></div>
+          <div class="jellyfish-glow focus-target"></div>
+          <div class="focus-halo jellyfish-focus"></div>
           <div class="jellyfish-tentacle jellyfish-t1"></div>
           <div class="jellyfish-tentacle jellyfish-t2"></div>
           <div class="jellyfish-tentacle jellyfish-t3"></div>
@@ -1150,7 +1240,8 @@
         </div>
         <div id="glowworm-demo" class="glowworm-demo">
           <div class="glowworm-rock"></div>
-          <div class="glowworm-head"></div>
+          <div class="glowworm-head focus-target"></div>
+          <div class="focus-halo glowworm-focus"></div>
           <div class="glowworm-body"></div>
           <div class="glow-thread t1"></div>
           <div class="glow-thread t2"></div>
@@ -1331,6 +1422,7 @@
     const heroAnimalButton = document.getElementById("hero-animal-button");
     const heroAnimalName = document.getElementById("hero-animal-name");
     const heroAnimalUse = document.getElementById("hero-animal-use");
+    const heroAnimalHint = document.getElementById("hero-animal-hint");
     const magnifierCopy = document.getElementById("magnifier-copy");
     const reactionCaption = document.getElementById("reaction-caption");
     const reactionArrow = document.getElementById("reaction-arrow");
@@ -1349,6 +1441,7 @@
     let selectedAnimalId = "anglerfish";
     let autoPulseInterval = null;
     let reactionTimeout = null;
+    let focusMode = false;
 
     function renderAnimalButtons() {
       animalList.innerHTML = "";
@@ -1389,6 +1482,9 @@
       animalUse.textContent = animal.use;
       heroAnimalName.textContent = animal.name;
       heroAnimalUse.textContent = animal.purpose.replace("Why it glows: ", "");
+      heroAnimalHint.textContent = focusMode
+        ? "Highlighted organ view is on. Click again to return to the full specimen."
+        : "Click to highlight the bioluminescent organ in this specimen view.";
       reactionCaption.textContent = animal.caption;
 
       if (animal.id === "anglerfish") {
@@ -1410,6 +1506,12 @@
         card.classList.toggle("active", isActive);
         card.setAttribute("aria-selected", String(isActive));
       });
+    }
+
+    function syncFocusMode() {
+      heroVisual.classList.toggle("focus-mode", focusMode);
+      heroAnimalButton.classList.toggle("active", focusMode);
+      heroAnimalButton.setAttribute("aria-pressed", String(focusMode));
     }
 
     function triggerReaction() {
@@ -1453,11 +1555,9 @@
     }
 
     heroAnimalButton.addEventListener("click", () => {
-      const currentIndex = animals.findIndex((animal) => animal.id === selectedAnimalId);
-      const nextAnimal = animals[(currentIndex + 1) % animals.length];
-      selectedAnimalId = nextAnimal.id;
+      focusMode = !focusMode;
+      syncFocusMode();
       updateSelectedAnimal();
-      triggerReaction();
     });
 
     triggerButton.addEventListener("click", triggerReaction);
@@ -1465,6 +1565,7 @@
 
     renderAnimalButtons();
     updateSelectedAnimal();
+    syncFocusMode();
     syncAutoPulse();
   </script>
 </body>
