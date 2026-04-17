@@ -1412,8 +1412,8 @@
         <div class="orb orb-three"></div>
         <div class="hero-glow"></div>
         <div id="angler-demo" class="angler-demo active">
-          <img class="specimen-photo" src="./assets/anglerfish-realistic.png" data-root-src="./anglerfish-realistic.png" alt="Realistic angler fish with glowing lure">
-          <div class="image-fallback">Angler fish image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
+          <img class="specimen-photo" src="./anglerfish-realistic.png" alt="Realistic angler fish with glowing lure">
+          <div class="image-fallback">Angler fish image missing. Make sure `anglerfish-realistic.png` is uploaded in the same place as `index.html`.</div>
           <div class="focus-halo angler-focus"></div>
           <div class="magnifier-stage">
             <div class="magnifier-rings"></div>
@@ -1422,8 +1422,8 @@
           </div>
         </div>
         <div id="firefly-demo" class="firefly-demo">
-          <img class="specimen-photo" src="./assets/firefly-realistic.png" data-root-src="./firefly-realistic.png" alt="Realistic firefly with glowing lantern">
-          <div class="image-fallback">Firefly image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
+          <img class="specimen-photo" src="./firefly-realistic.png" alt="Realistic firefly with glowing lantern">
+          <div class="image-fallback">Firefly image missing. Make sure `firefly-realistic.png` is uploaded in the same place as `index.html`.</div>
           <div class="focus-halo firefly-focus"></div>
           <div class="firefly-magnifier">
             <div class="magnifier-rings"></div>
@@ -1432,8 +1432,8 @@
           </div>
         </div>
         <div id="jellyfish-demo" class="jellyfish-demo">
-          <img class="specimen-photo" src="./assets/jellyfish-realistic.png" data-root-src="./jellyfish-realistic.png" alt="Realistic jellyfish with bioluminescent glow">
-          <div class="image-fallback">Jellyfish image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
+          <img class="specimen-photo" src="./jellyfish-realistic.png" alt="Realistic jellyfish with bioluminescent glow">
+          <div class="image-fallback">Jellyfish image missing. Make sure `jellyfish-realistic.png` is uploaded in the same place as `index.html`.</div>
           <div class="focus-halo jellyfish-focus"></div>
           <div class="jellyfish-magnifier">
             <div class="magnifier-rings"></div>
@@ -1442,8 +1442,8 @@
           </div>
         </div>
         <div id="glowworm-demo" class="glowworm-demo">
-          <img class="specimen-photo" src="./assets/glowworm-realistic.png" data-root-src="./glowworm-realistic.png" alt="Realistic glowworm with glowing threads">
-          <div class="image-fallback">Glowworm image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
+          <img class="specimen-photo" src="./glowworm-realistic.png" alt="Realistic glowworm with glowing threads">
+          <div class="image-fallback">Glowworm image missing. Make sure `glowworm-realistic.png` is uploaded in the same place as `index.html`.</div>
           <div class="focus-halo glowworm-focus"></div>
           <div class="glowworm-magnifier">
             <div class="magnifier-rings"></div>
@@ -2210,11 +2210,6 @@
         if (!demo) return;
 
         image.addEventListener("error", () => {
-          const rootSrc = image.dataset.rootSrc;
-          if (rootSrc && image.src.indexOf(rootSrc) === -1) {
-            image.src = rootSrc;
-            return;
-          }
           demo.dataset.imageMissing = "true";
         });
 
