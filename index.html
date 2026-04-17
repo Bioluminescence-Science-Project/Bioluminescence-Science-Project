@@ -380,6 +380,29 @@
     .jellyfish-demo .specimen-photo { object-position: 48% 45%; }
     .glowworm-demo .specimen-photo { object-position: 50% 45%; }
 
+    .image-fallback {
+      position: absolute;
+      inset: 18% 12%;
+      display: none;
+      place-items: center;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 24px;
+      border: 1px dashed rgba(153, 236, 255, 0.36);
+      background: rgba(4, 18, 28, 0.72);
+      color: var(--text);
+      line-height: 1.5;
+      z-index: 2;
+    }
+
+    [data-image-missing="true"] .image-fallback {
+      display: grid;
+    }
+
+    [data-image-missing="true"] .specimen-photo {
+      opacity: 0;
+    }
+
     .angler-fish {
       position: absolute;
       left: 8%;
@@ -1114,6 +1137,88 @@
       margin-bottom: 0.3rem;
     }
 
+    .quiz-box {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 0.4rem;
+      padding: 1rem;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(7, 31, 45, 0.92), rgba(3, 18, 28, 0.84));
+      border: 1px solid rgba(153, 236, 255, 0.14);
+    }
+
+    .quiz-topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .quiz-question {
+      margin: 0;
+      font-size: 1.02rem;
+      line-height: 1.5;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .quiz-option {
+      width: 100%;
+      border: 1px solid rgba(153, 236, 255, 0.15);
+      border-radius: 16px;
+      padding: 0.85rem 0.9rem;
+      text-align: left;
+      font: inherit;
+      color: var(--text);
+      background: rgba(5, 23, 34, 0.88);
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    }
+
+    .quiz-option:hover,
+    .quiz-option:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(134, 255, 210, 0.46);
+      background: rgba(8, 33, 46, 0.96);
+    }
+
+    .quiz-option.correct {
+      border-color: rgba(134, 255, 210, 0.72);
+      background: rgba(27, 67, 61, 0.88);
+    }
+
+    .quiz-option.wrong {
+      border-color: rgba(255, 166, 166, 0.72);
+      background: rgba(76, 30, 30, 0.88);
+    }
+
+    .quiz-feedback {
+      min-height: 1.4rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .quiz-actions {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .secondary-btn {
+      border: 1px solid rgba(153, 236, 255, 0.18);
+      border-radius: 999px;
+      padding: 0.75rem 1rem;
+      background: rgba(5, 23, 34, 0.9);
+      color: var(--text);
+      font: inherit;
+      cursor: pointer;
+    }
+
     @keyframes pulse {
       0%, 100% { transform: scale(0.95); opacity: 0.72; }
       50% { transform: scale(1.1); opacity: 1; }
@@ -1230,6 +1335,7 @@
         <div class="hero-glow"></div>
         <div id="angler-demo" class="angler-demo active">
           <img class="specimen-photo" src="assets/anglerfish-realistic.png" alt="Realistic angler fish with glowing lure">
+          <div class="image-fallback">Angler fish image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo angler-focus"></div>
           <div class="magnifier-stage">
             <div class="magnifier-rings"></div>
@@ -1239,6 +1345,7 @@
         </div>
         <div id="firefly-demo" class="firefly-demo">
           <img class="specimen-photo" src="assets/firefly-realistic.png" alt="Realistic firefly with glowing lantern">
+          <div class="image-fallback">Firefly image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo firefly-focus"></div>
           <div class="firefly-magnifier">
             <div class="magnifier-rings"></div>
@@ -1248,6 +1355,7 @@
         </div>
         <div id="jellyfish-demo" class="jellyfish-demo">
           <img class="specimen-photo" src="assets/jellyfish-realistic.png" alt="Realistic jellyfish with bioluminescent glow">
+          <div class="image-fallback">Jellyfish image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo jellyfish-focus"></div>
           <div class="jellyfish-magnifier">
             <div class="magnifier-rings"></div>
@@ -1257,6 +1365,7 @@
         </div>
         <div id="glowworm-demo" class="glowworm-demo">
           <img class="specimen-photo" src="assets/glowworm-realistic.png" alt="Realistic glowworm with glowing threads">
+          <div class="image-fallback">Glowworm image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo glowworm-focus"></div>
           <div class="glowworm-magnifier">
             <div class="magnifier-rings"></div>
@@ -1371,6 +1480,23 @@
               <span id="animal-use" class="fact-value"></span>
             </div>
           </div>
+          <div class="quiz-box">
+            <div class="panel-heading">
+              <p class="section-tag">Classroom Game</p>
+              <h2>Glow Match Challenge</h2>
+            </div>
+            <div class="quiz-topline">
+              <span id="quiz-progress">Question 1 of 5</span>
+              <span id="quiz-score">Score: 0</span>
+            </div>
+            <p id="quiz-question" class="quiz-question"></p>
+            <div id="quiz-options" class="quiz-options"></div>
+            <p id="quiz-feedback" class="quiz-feedback"></p>
+            <div class="quiz-actions">
+              <button id="quiz-next" class="secondary-btn" type="button">Next Question</button>
+              <button id="quiz-restart" class="secondary-btn" type="button">Restart Game</button>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -1436,6 +1562,13 @@
     const heroAnimalUse = document.getElementById("hero-animal-use");
     const heroAnimalHint = document.getElementById("hero-animal-hint");
     const magnifierCopy = document.getElementById("magnifier-copy");
+    const quizProgress = document.getElementById("quiz-progress");
+    const quizScore = document.getElementById("quiz-score");
+    const quizQuestion = document.getElementById("quiz-question");
+    const quizOptions = document.getElementById("quiz-options");
+    const quizFeedback = document.getElementById("quiz-feedback");
+    const quizNext = document.getElementById("quiz-next");
+    const quizRestart = document.getElementById("quiz-restart");
     const reactionCaption = document.getElementById("reaction-caption");
     const reactionArrow = document.getElementById("reaction-arrow");
     const reactionStage = document.getElementById("reaction-stage");
@@ -1449,11 +1582,41 @@
       jellyfish: document.getElementById("jellyfish-demo"),
       glowworm: document.getElementById("glowworm-demo"),
     };
+    const quizQuestions = [
+      {
+        question: "Which animal uses a glowing lure to bring prey closer?",
+        options: ["Angler Fish", "Firefly", "Jellyfish", "Glowworm"],
+        answer: "Angler Fish",
+      },
+      {
+        question: "What gas combines with luciferin to help produce light?",
+        options: ["Oxygen", "Nitrogen", "Hydrogen", "Helium"],
+        answer: "Oxygen",
+      },
+      {
+        question: "Which animal flashes mainly to attract mates?",
+        options: ["Glowworm", "Jellyfish", "Firefly", "Angler Fish"],
+        answer: "Firefly",
+      },
+      {
+        question: "Which organism uses glowing hanging threads to catch insects?",
+        options: ["Jellyfish", "Glowworm", "Firefly", "Angler Fish"],
+        answer: "Glowworm",
+      },
+      {
+        question: "Which animal often glows as a defense or distraction?",
+        options: ["Jellyfish", "Firefly", "Angler Fish", "Glowworm"],
+        answer: "Jellyfish",
+      },
+    ];
 
     let selectedAnimalId = "anglerfish";
     let autoPulseInterval = null;
     let reactionTimeout = null;
     let focusMode = false;
+    let quizIndex = 0;
+    let quizScoreValue = 0;
+    let quizAnswered = false;
 
     function renderAnimalButtons() {
       animalList.innerHTML = "";
@@ -1520,10 +1683,93 @@
       });
     }
 
+    function renderQuizQuestion() {
+      const current = quizQuestions[quizIndex];
+      quizAnswered = false;
+      quizProgress.textContent = "Question " + (quizIndex + 1) + " of " + quizQuestions.length;
+      quizScore.textContent = "Score: " + quizScoreValue;
+      quizQuestion.textContent = current.question;
+      quizFeedback.textContent = "Choose the best answer.";
+      quizOptions.innerHTML = "";
+
+      current.options.forEach((option) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "quiz-option";
+        button.textContent = option;
+        button.addEventListener("click", () => handleQuizAnswer(button, option, current.answer));
+        quizOptions.appendChild(button);
+      });
+
+      quizNext.disabled = true;
+    }
+
+    function handleQuizAnswer(button, chosen, correct) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+
+      quizOptions.querySelectorAll(".quiz-option").forEach((optionButton) => {
+        optionButton.disabled = true;
+        if (optionButton.textContent === correct) {
+          optionButton.classList.add("correct");
+        }
+      });
+
+      if (chosen === correct) {
+        quizScoreValue += 1;
+        button.classList.add("correct");
+        quizFeedback.textContent = "Correct. " + correct + " is the right answer.";
+      } else {
+        button.classList.add("wrong");
+        quizFeedback.textContent = "Not quite. The correct answer is " + correct + ".";
+      }
+
+      quizScore.textContent = "Score: " + quizScoreValue;
+      quizNext.disabled = false;
+    }
+
+    function goToNextQuestion() {
+      if (quizIndex < quizQuestions.length - 1) {
+        quizIndex += 1;
+        renderQuizQuestion();
+      } else {
+        quizProgress.textContent = "Finished";
+        quizQuestion.textContent = "Game complete. You scored " + quizScoreValue + " out of " + quizQuestions.length + ".";
+        quizFeedback.textContent = "Press Restart Game to play again.";
+        quizOptions.innerHTML = "";
+        quizNext.disabled = true;
+      }
+    }
+
+    function restartQuiz() {
+      quizIndex = 0;
+      quizScoreValue = 0;
+      renderQuizQuestion();
+    }
+
     function syncFocusMode() {
       heroVisual.classList.toggle("focus-mode", focusMode);
       heroAnimalButton.classList.toggle("active", focusMode);
       heroAnimalButton.setAttribute("aria-pressed", String(focusMode));
+    }
+
+    function wireImageFallbacks() {
+      document.querySelectorAll(".specimen-photo").forEach((image) => {
+        const demo = image.parentElement;
+        if (!demo) return;
+
+        image.addEventListener("error", () => {
+          demo.dataset.imageMissing = "true";
+        });
+
+        image.addEventListener("load", () => {
+          demo.dataset.imageMissing = "false";
+        });
+
+        if (image.complete && image.naturalWidth === 0) {
+          demo.dataset.imageMissing = "true";
+        }
+      });
     }
 
     function triggerReaction() {
@@ -1574,11 +1820,15 @@
 
     triggerButton.addEventListener("click", triggerReaction);
     autoPulseToggle.addEventListener("change", syncAutoPulse);
+    quizNext.addEventListener("click", goToNextQuestion);
+    quizRestart.addEventListener("click", restartQuiz);
 
     renderAnimalButtons();
     updateSelectedAnimal();
     syncFocusMode();
     syncAutoPulse();
+    wireImageFallbacks();
+    renderQuizQuestion();
   </script>
 </body>
 </html>
