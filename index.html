@@ -129,6 +129,15 @@
       background: rgba(4, 22, 32, 0.82);
       border: 1px solid rgba(153, 236, 255, 0.14);
       min-width: 220px;
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .hero-animal:hover,
+    .hero-animal:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(134, 255, 210, 0.5);
+      background: rgba(6, 28, 40, 0.94);
     }
 
     .hero-animal-label {
@@ -1078,13 +1087,13 @@
           </label>
         </div>
         <div class="hero-demo">
-          <div class="hero-animal">
+          <button id="hero-animal-button" class="hero-animal" type="button">
             <div>
               <span class="hero-animal-label">Main Example</span>
               <span id="hero-animal-name" class="hero-animal-name">Angler Fish</span>
               <span id="hero-animal-use" class="hero-animal-use">uses a glowing lure to attract prey</span>
             </div>
-          </div>
+          </button>
           <div class="magnifier-card">
             <div class="magnifier-copy">
               <strong>Magnified light</strong>
@@ -1319,6 +1328,7 @@
     const animalDescription = document.getElementById("animal-description");
     const animalColor = document.getElementById("animal-color");
     const animalUse = document.getElementById("animal-use");
+    const heroAnimalButton = document.getElementById("hero-animal-button");
     const heroAnimalName = document.getElementById("hero-animal-name");
     const heroAnimalUse = document.getElementById("hero-animal-use");
     const magnifierCopy = document.getElementById("magnifier-copy");
@@ -1441,6 +1451,14 @@
         autoPulseInterval = window.setInterval(triggerReaction, 2600);
       }
     }
+
+    heroAnimalButton.addEventListener("click", () => {
+      const currentIndex = animals.findIndex((animal) => animal.id === selectedAnimalId);
+      const nextAnimal = animals[(currentIndex + 1) % animals.length];
+      selectedAnimalId = nextAnimal.id;
+      updateSelectedAnimal();
+      triggerReaction();
+    });
 
     triggerButton.addEventListener("click", triggerReaction);
     autoPulseToggle.addEventListener("change", syncAutoPulse);
