@@ -1156,6 +1156,11 @@
       font-size: 0.9rem;
     }
 
+    .quiz-timer {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
     .quiz-question {
       margin: 0;
       font-size: 1.02rem;
@@ -1334,7 +1339,7 @@
         <div class="orb orb-three"></div>
         <div class="hero-glow"></div>
         <div id="angler-demo" class="angler-demo active">
-          <img class="specimen-photo" src="assets/anglerfish-realistic.png" alt="Realistic angler fish with glowing lure">
+          <img class="specimen-photo" src="./assets/anglerfish-realistic.png" alt="Realistic angler fish with glowing lure">
           <div class="image-fallback">Angler fish image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo angler-focus"></div>
           <div class="magnifier-stage">
@@ -1344,7 +1349,7 @@
           </div>
         </div>
         <div id="firefly-demo" class="firefly-demo">
-          <img class="specimen-photo" src="assets/firefly-realistic.png" alt="Realistic firefly with glowing lantern">
+          <img class="specimen-photo" src="./assets/firefly-realistic.png" alt="Realistic firefly with glowing lantern">
           <div class="image-fallback">Firefly image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo firefly-focus"></div>
           <div class="firefly-magnifier">
@@ -1354,7 +1359,7 @@
           </div>
         </div>
         <div id="jellyfish-demo" class="jellyfish-demo">
-          <img class="specimen-photo" src="assets/jellyfish-realistic.png" alt="Realistic jellyfish with bioluminescent glow">
+          <img class="specimen-photo" src="./assets/jellyfish-realistic.png" alt="Realistic jellyfish with bioluminescent glow">
           <div class="image-fallback">Jellyfish image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo jellyfish-focus"></div>
           <div class="jellyfish-magnifier">
@@ -1364,7 +1369,7 @@
           </div>
         </div>
         <div id="glowworm-demo" class="glowworm-demo">
-          <img class="specimen-photo" src="assets/glowworm-realistic.png" alt="Realistic glowworm with glowing threads">
+          <img class="specimen-photo" src="./assets/glowworm-realistic.png" alt="Realistic glowworm with glowing threads">
           <div class="image-fallback">Glowworm image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo glowworm-focus"></div>
           <div class="glowworm-magnifier">
@@ -1488,6 +1493,7 @@
             <div class="quiz-topline">
               <span id="quiz-progress">Question 1 of 5</span>
               <span id="quiz-score">Score: 0</span>
+              <span id="quiz-timer" class="quiz-timer">20s</span>
             </div>
             <p id="quiz-question" class="quiz-question"></p>
             <div id="quiz-options" class="quiz-options"></div>
@@ -1564,6 +1570,7 @@
     const magnifierCopy = document.getElementById("magnifier-copy");
     const quizProgress = document.getElementById("quiz-progress");
     const quizScore = document.getElementById("quiz-score");
+    const quizTimer = document.getElementById("quiz-timer");
     const quizQuestion = document.getElementById("quiz-question");
     const quizOptions = document.getElementById("quiz-options");
     const quizFeedback = document.getElementById("quiz-feedback");
@@ -1584,9 +1591,44 @@
     };
     const quizQuestions = [
       {
-        question: "Which animal uses a glowing lure to bring prey closer?",
+        question: "A predator in the deep ocean wants prey to swim closer before attacking. Which bioluminescent strategy best fits that goal?",
         options: ["Angler Fish", "Firefly", "Jellyfish", "Glowworm"],
         answer: "Angler Fish",
+      },
+      {
+        question: "In the reaction shown on the page, which ingredient is the enzyme that speeds up light production without being used up like a fuel?",
+        options: ["Luciferase", "Luciferin", "Oxygen", "Oxyluciferin"],
+        answer: "Luciferase",
+      },
+      {
+        question: "Why is blue-green light especially common in many ocean animals such as angler fish and jellyfish?",
+        options: [
+          "It travels well through seawater",
+          "It uses no oxygen",
+          "Predators cannot see blue-green light",
+          "It is always hotter than yellow light"
+        ],
+        answer: "It travels well through seawater",
+      },
+      {
+        question: "If a firefly stops controlling oxygen flow into its lantern organ, what would most likely happen to its flashes?",
+        options: [
+          "The flashes would become harder to control",
+          "The insect would instantly become brighter",
+          "The light would turn blue underwater",
+          "The luciferase would turn into luciferin"
+        ],
+        answer: "The flashes would become harder to control",
+      },
+      {
+        question: "Which statement best explains why glowworms use bioluminescence differently from fireflies?",
+        options: [
+          "Glowworms use light to trap prey, while fireflies mainly use it to communicate",
+          "Glowworms use light for photosynthesis, while fireflies use it for heat",
+          "Glowworms glow only in daytime, while fireflies glow only underwater",
+          "Glowworms make red light, while fireflies make no visible light"
+        ],
+        answer: "Glowworms use light to trap prey, while fireflies mainly use it to communicate",
       },
       {
         question: "What gas combines with luciferin to help produce light?",
@@ -1594,17 +1636,17 @@
         answer: "Oxygen",
       },
       {
-        question: "Which animal flashes mainly to attract mates?",
+        question: "A scientist sees short blinking patterns over a summer field. Which organism is most likely using those flashes as a mating signal?",
         options: ["Glowworm", "Jellyfish", "Firefly", "Angler Fish"],
         answer: "Firefly",
       },
       {
-        question: "Which organism uses glowing hanging threads to catch insects?",
+        question: "Which organism uses glowing hanging threads as part of a trap in dark environments?",
         options: ["Jellyfish", "Glowworm", "Firefly", "Angler Fish"],
         answer: "Glowworm",
       },
       {
-        question: "Which animal often glows as a defense or distraction?",
+        question: "Which animal often uses bioluminescence as a defense or distraction rather than for hunting or mating?",
         options: ["Jellyfish", "Firefly", "Angler Fish", "Glowworm"],
         answer: "Jellyfish",
       },
@@ -1617,6 +1659,17 @@
     let quizIndex = 0;
     let quizScoreValue = 0;
     let quizAnswered = false;
+    let quizTimerValue = 20;
+    let quizTimerInterval = null;
+
+    function shuffleArray(items) {
+      const copy = [...items];
+      for (let index = copy.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+      }
+      return copy;
+    }
 
     function renderAnimalButtons() {
       animalList.innerHTML = "";
@@ -1691,8 +1744,10 @@
       quizQuestion.textContent = current.question;
       quizFeedback.textContent = "Choose the best answer.";
       quizOptions.innerHTML = "";
+      quizTimerValue = 20;
+      quizTimer.textContent = quizTimerValue + "s";
 
-      current.options.forEach((option) => {
+      shuffleArray(current.options).forEach((option) => {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "quiz-option";
@@ -1702,11 +1757,13 @@
       });
 
       quizNext.disabled = true;
+      startQuizTimer(current.answer);
     }
 
     function handleQuizAnswer(button, chosen, correct) {
       if (quizAnswered) return;
       quizAnswered = true;
+      stopQuizTimer();
 
       quizOptions.querySelectorAll(".quiz-option").forEach((optionButton) => {
         optionButton.disabled = true;
@@ -1728,16 +1785,47 @@
       quizNext.disabled = false;
     }
 
+    function startQuizTimer(correctAnswer) {
+      stopQuizTimer();
+      quizTimerInterval = window.setInterval(() => {
+        quizTimerValue -= 1;
+        quizTimer.textContent = quizTimerValue + "s";
+
+        if (quizTimerValue <= 0) {
+          stopQuizTimer();
+          if (quizAnswered) return;
+          quizAnswered = true;
+          quizFeedback.textContent = "Time is up. The correct answer is " + correctAnswer + ".";
+          quizOptions.querySelectorAll(".quiz-option").forEach((optionButton) => {
+            optionButton.disabled = true;
+            if (optionButton.textContent === correctAnswer) {
+              optionButton.classList.add("correct");
+            }
+          });
+          quizNext.disabled = false;
+        }
+      }, 1000);
+    }
+
+    function stopQuizTimer() {
+      if (quizTimerInterval) {
+        window.clearInterval(quizTimerInterval);
+        quizTimerInterval = null;
+      }
+    }
+
     function goToNextQuestion() {
       if (quizIndex < quizQuestions.length - 1) {
         quizIndex += 1;
         renderQuizQuestion();
       } else {
+        stopQuizTimer();
         quizProgress.textContent = "Finished";
         quizQuestion.textContent = "Game complete. You scored " + quizScoreValue + " out of " + quizQuestions.length + ".";
         quizFeedback.textContent = "Press Restart Game to play again.";
         quizOptions.innerHTML = "";
         quizNext.disabled = true;
+        quizTimer.textContent = "0s";
       }
     }
 
