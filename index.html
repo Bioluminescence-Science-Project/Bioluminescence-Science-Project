@@ -859,6 +859,30 @@
 
     .reaction-panel { display: flex; flex-direction: column; }
 
+    .reaction-tabs {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      border: 1px solid rgba(153, 236, 255, 0.16);
+      border-radius: 999px;
+      padding: 0.6rem 0.95rem;
+      background: rgba(4, 21, 31, 0.88);
+      color: var(--muted);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      color: #06252d;
+      background: linear-gradient(90deg, rgba(111, 197, 255, 0.92), rgba(255, 227, 108, 0.9));
+      border-color: transparent;
+      font-weight: 700;
+    }
+
     .reaction-stage {
       display: grid;
       gap: 1.1rem;
@@ -1093,6 +1117,55 @@
 
     .reaction-arrow.active { animation: flare 900ms ease; }
     .reaction-caption { margin-top: 1rem; line-height: 1.6; }
+    .reaction-view[hidden] { display: none; }
+
+    .wavelength-panel {
+      display: grid;
+      gap: 1rem;
+      padding: 1.1rem;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(6, 34, 49, 0.85), rgba(4, 18, 27, 0.72));
+      min-height: 100%;
+    }
+
+    .wavelength-bar {
+      position: relative;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #2d57ff 0%, #27b3ff 25%, #45ffd2 50%, #d8ff55 75%, #ffe36c 100%);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .wavelength-marker {
+      position: absolute;
+      top: -7px;
+      width: 4px;
+      height: 32px;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 0 14px rgba(255,255,255,0.5);
+      transform: translateX(-50%);
+    }
+
+    .wavelength-scale {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .wavelength-facts {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .wavelength-box {
+      border-radius: 18px;
+      padding: 0.9rem;
+      background: rgba(3, 20, 29, 0.76);
+      border: 1px solid rgba(153, 236, 255, 0.14);
+    }
     .detail-card { display: grid; gap: 1rem; }
 
     .detail-top {
@@ -1395,6 +1468,11 @@
           <p class="section-tag">Chemical reaction</p>
           <h2>How the glow happens</h2>
         </div>
+        <div class="reaction-tabs" role="tablist" aria-label="Science tabs">
+          <button id="tab-reaction" class="tab-btn active" type="button">Reaction</button>
+          <button id="tab-wavelength" class="tab-btn" type="button">Wavelength</button>
+        </div>
+        <div id="reaction-view" class="reaction-view">
         <div id="reaction-stage" class="reaction-stage">
           <div class="reaction-chamber" aria-hidden="true">
             <div class="chamber-core"></div>
@@ -1459,6 +1537,34 @@
           </div>
         </div>
         <div id="reaction-caption" class="reaction-caption"></div>
+        </div>
+        <div id="wavelength-view" class="reaction-view" hidden>
+          <div class="wavelength-panel">
+            <div>
+              <p class="section-tag">Color and wavelength</p>
+              <h2 id="wavelength-title">Why this glow color?</h2>
+            </div>
+            <div class="wavelength-bar">
+              <div id="wavelength-marker" class="wavelength-marker" style="left: 40%;"></div>
+            </div>
+            <div class="wavelength-scale">
+              <span>450 nm</span>
+              <span>500 nm</span>
+              <span>550 nm</span>
+              <span>600 nm</span>
+            </div>
+            <div class="wavelength-facts">
+              <div class="wavelength-box">
+                <strong id="wavelength-color-label">Blue-green glow</strong>
+                <p id="wavelength-explanation" class="detail-text"></p>
+              </div>
+              <div class="wavelength-box">
+                <strong>Why this color helps</strong>
+                <p id="wavelength-advantage" class="detail-text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="panel detail-panel">
@@ -1519,6 +1625,10 @@
         color: "yellow-green",
         use: "communication",
         caption: "In fireflies, luciferase helps turn chemical energy into a cool yellow-green flash that is used like a coded signal.",
+        wavelengthLabel: "Yellow-green glow",
+        wavelengthPosition: "78%",
+        wavelengthExplanation: "Firefly light is usually around yellow-green wavelengths, which stand out well at night and are easy for other fireflies to notice.",
+        wavelengthAdvantage: "That color works well for signaling in air, especially for short coded flashes used during mate-finding.",
       },
       {
         id: "anglerfish",
@@ -1530,6 +1640,10 @@
         color: "blue-green",
         use: "hunting",
         caption: "Deep-sea animals often produce blue-green light because those wavelengths travel well underwater and stand out in darkness.",
+        wavelengthLabel: "Blue-green glow",
+        wavelengthPosition: "38%",
+        wavelengthExplanation: "Angler fish often glow in the blue-green part of the visible spectrum, which travels efficiently through seawater.",
+        wavelengthAdvantage: "In the deep ocean, blue-green light is easier to detect over distance, so the lure can attract prey more effectively.",
       },
       {
         id: "jellyfish",
@@ -1541,6 +1655,10 @@
         color: "cyan",
         use: "defense",
         caption: "In glowing jellyfish, bioluminescence can act like an underwater alarm system, turning danger into a bright distraction.",
+        wavelengthLabel: "Cyan-blue glow",
+        wavelengthPosition: "30%",
+        wavelengthExplanation: "Jellyfish often emit cyan or blue light because those wavelengths show up clearly in ocean water.",
+        wavelengthAdvantage: "That makes the glow useful for startling predators, creating distraction, or signaling trouble in dark water.",
       },
       {
         id: "glowworm",
@@ -1552,6 +1670,10 @@
         color: "blue-green",
         use: "trapping prey",
         caption: "Glowworms use the luciferin reaction as bait, turning a simple chemical glow into a hunting strategy.",
+        wavelengthLabel: "Blue-green glow",
+        wavelengthPosition: "42%",
+        wavelengthExplanation: "Glowworms make blue-green light that stands out strongly in caves and other dark habitats.",
+        wavelengthAdvantage: "That cool-colored glow is highly visible in darkness, helping lure insects toward the hanging sticky threads.",
       },
     ];
 
@@ -1577,6 +1699,15 @@
     const quizNext = document.getElementById("quiz-next");
     const quizRestart = document.getElementById("quiz-restart");
     const reactionCaption = document.getElementById("reaction-caption");
+    const tabReaction = document.getElementById("tab-reaction");
+    const tabWavelength = document.getElementById("tab-wavelength");
+    const reactionView = document.getElementById("reaction-view");
+    const wavelengthView = document.getElementById("wavelength-view");
+    const wavelengthMarker = document.getElementById("wavelength-marker");
+    const wavelengthTitle = document.getElementById("wavelength-title");
+    const wavelengthColorLabel = document.getElementById("wavelength-color-label");
+    const wavelengthExplanation = document.getElementById("wavelength-explanation");
+    const wavelengthAdvantage = document.getElementById("wavelength-advantage");
     const reactionArrow = document.getElementById("reaction-arrow");
     const reactionStage = document.getElementById("reaction-stage");
     const lightProduct = document.getElementById("light-product");
@@ -1877,6 +2008,7 @@
     let quizTimerValue = 20;
     let quizTimerInterval = null;
     let activeQuizQuestions = [];
+    let activeScienceTab = "reaction";
 
     function shuffleArray(items) {
       const copy = [...items];
@@ -1930,6 +2062,11 @@
         ? "Highlighted organ view is on. Click again to return to the full specimen."
         : "Click to highlight the bioluminescent organ in this specimen view.";
       reactionCaption.textContent = animal.caption;
+      wavelengthTitle.textContent = animal.name + ": why this glow color?";
+      wavelengthColorLabel.textContent = animal.wavelengthLabel;
+      wavelengthExplanation.textContent = animal.wavelengthExplanation;
+      wavelengthAdvantage.textContent = animal.wavelengthAdvantage;
+      wavelengthMarker.style.left = animal.wavelengthPosition;
 
       if (animal.id === "anglerfish") {
         magnifierCopy.textContent = "The magnifying glass zooms in on the anglerfish lure that glows in the dark ocean.";
@@ -2058,6 +2195,15 @@
       heroAnimalButton.setAttribute("aria-pressed", String(focusMode));
     }
 
+    function setScienceTab(tabName) {
+      activeScienceTab = tabName;
+      const showReaction = tabName === "reaction";
+      reactionView.hidden = !showReaction;
+      wavelengthView.hidden = showReaction;
+      tabReaction.classList.toggle("active", showReaction);
+      tabWavelength.classList.toggle("active", !showReaction);
+    }
+
     function wireImageFallbacks() {
       document.querySelectorAll(".specimen-photo").forEach((image) => {
         const demo = image.parentElement;
@@ -2132,11 +2278,14 @@
     autoPulseToggle.addEventListener("change", syncAutoPulse);
     quizNext.addEventListener("click", goToNextQuestion);
     quizRestart.addEventListener("click", restartQuiz);
+    tabReaction.addEventListener("click", () => setScienceTab("reaction"));
+    tabWavelength.addEventListener("click", () => setScienceTab("wavelength"));
 
     renderAnimalButtons();
     updateSelectedAnimal();
     syncFocusMode();
     syncAutoPulse();
+    setScienceTab("reaction");
     wireImageFallbacks();
     restartQuiz();
   </script>
