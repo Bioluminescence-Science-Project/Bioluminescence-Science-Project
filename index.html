@@ -1339,7 +1339,7 @@
         <div class="orb orb-three"></div>
         <div class="hero-glow"></div>
         <div id="angler-demo" class="angler-demo active">
-          <img class="specimen-photo" src="./assets/anglerfish-realistic.png" alt="Realistic angler fish with glowing lure">
+          <img class="specimen-photo" src="./assets/anglerfish-realistic.png" data-root-src="./anglerfish-realistic.png" alt="Realistic angler fish with glowing lure">
           <div class="image-fallback">Angler fish image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo angler-focus"></div>
           <div class="magnifier-stage">
@@ -1349,7 +1349,7 @@
           </div>
         </div>
         <div id="firefly-demo" class="firefly-demo">
-          <img class="specimen-photo" src="./assets/firefly-realistic.png" alt="Realistic firefly with glowing lantern">
+          <img class="specimen-photo" src="./assets/firefly-realistic.png" data-root-src="./firefly-realistic.png" alt="Realistic firefly with glowing lantern">
           <div class="image-fallback">Firefly image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo firefly-focus"></div>
           <div class="firefly-magnifier">
@@ -1359,7 +1359,7 @@
           </div>
         </div>
         <div id="jellyfish-demo" class="jellyfish-demo">
-          <img class="specimen-photo" src="./assets/jellyfish-realistic.png" alt="Realistic jellyfish with bioluminescent glow">
+          <img class="specimen-photo" src="./assets/jellyfish-realistic.png" data-root-src="./jellyfish-realistic.png" alt="Realistic jellyfish with bioluminescent glow">
           <div class="image-fallback">Jellyfish image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo jellyfish-focus"></div>
           <div class="jellyfish-magnifier">
@@ -1369,7 +1369,7 @@
           </div>
         </div>
         <div id="glowworm-demo" class="glowworm-demo">
-          <img class="specimen-photo" src="./assets/glowworm-realistic.png" alt="Realistic glowworm with glowing threads">
+          <img class="specimen-photo" src="./assets/glowworm-realistic.png" data-root-src="./glowworm-realistic.png" alt="Realistic glowworm with glowing threads">
           <div class="image-fallback">Glowworm image missing. Upload the `assets` folder with this site so the realistic specimen images can load.</div>
           <div class="focus-halo glowworm-focus"></div>
           <div class="glowworm-magnifier">
@@ -1589,7 +1589,7 @@
       jellyfish: document.getElementById("jellyfish-demo"),
       glowworm: document.getElementById("glowworm-demo"),
     };
-    const quizQuestions = [
+    const quizQuestionBank = [
       {
         question: "A predator in the deep ocean wants prey to swim closer before attacking. Which bioluminescent strategy best fits that goal?",
         options: ["Angler Fish", "Firefly", "Jellyfish", "Glowworm"],
@@ -1650,6 +1650,221 @@
         options: ["Jellyfish", "Firefly", "Angler Fish", "Glowworm"],
         answer: "Jellyfish",
       },
+      {
+        question: "Which statement best explains the role of luciferin in a bioluminescent reaction?",
+        options: [
+          "It acts as the light-producing molecule that gets chemically changed",
+          "It is the enzyme that speeds up the reaction",
+          "It blocks oxygen so light turns off",
+          "It stores sound instead of energy"
+        ],
+        answer: "It acts as the light-producing molecule that gets chemically changed",
+      },
+      {
+        question: "Why is bioluminescence usually called a 'cold light'?",
+        options: [
+          "Very little energy is released as heat",
+          "It only works in freezing habitats",
+          "The reaction must happen in ice",
+          "It makes surrounding water colder"
+        ],
+        answer: "Very little energy is released as heat",
+      },
+      {
+        question: "If oxygen were removed from the reaction shown on the page, what would most likely happen?",
+        options: [
+          "Light production would drop or stop",
+          "The light would immediately turn red",
+          "The luciferase would glow by itself",
+          "More oxyluciferin would form faster"
+        ],
+        answer: "Light production would drop or stop",
+      },
+      {
+        question: "Which adaptation makes firefly light especially useful for communication?",
+        options: [
+          "The flashes can be turned on and off in patterns",
+          "The light can only be seen underwater",
+          "The flashes permanently blind predators",
+          "The glow is hot enough to burn leaves"
+        ],
+        answer: "The flashes can be turned on and off in patterns",
+      },
+      {
+        question: "What is the best reason a jellyfish might glow after being disturbed?",
+        options: [
+          "To confuse predators or attract attention away from itself",
+          "To help it photosynthesize faster",
+          "To warm the surrounding water",
+          "To replace oxygen in the ocean"
+        ],
+        answer: "To confuse predators or attract attention away from itself",
+      },
+      {
+        question: "A glowworm's hunting strategy works best in which environment?",
+        options: [
+          "Dark places where small insects can be attracted to the glow",
+          "Open sunny fields at noon",
+          "Dry deserts with no flying insects",
+          "Bright coral reefs"
+        ],
+        answer: "Dark places where small insects can be attracted to the glow",
+      },
+      {
+        question: "Why would a deep-sea animal benefit from making its own light?",
+        options: [
+          "Sunlight is absent or very limited in its habitat",
+          "The water contains no oxygen",
+          "Sound cannot travel underwater",
+          "Its predators can only see red light"
+        ],
+        answer: "Sunlight is absent or very limited in its habitat",
+      },
+      {
+        question: "Which pairing is correct for molecule and job?",
+        options: [
+          "Luciferase: enzyme, Luciferin: fuel-like light-producing molecule",
+          "Luciferase: oxygen, Luciferin: enzyme",
+          "Luciferase: product, Oxyluciferin: reactant",
+          "Luciferase: light, Luciferin: water"
+        ],
+        answer: "Luciferase: enzyme, Luciferin: fuel-like light-producing molecule",
+      },
+      {
+        question: "If a student says all glowing animals use light for the same reason, what is the best correction?",
+        options: [
+          "Different organisms use light for hunting, defense, trapping prey, or communication",
+          "They all glow only to stay warm",
+          "They all glow only to scare humans",
+          "They all glow only to make oxygen"
+        ],
+        answer: "Different organisms use light for hunting, defense, trapping prey, or communication",
+      },
+      {
+        question: "What does the product oxyluciferin represent in this reaction?",
+        options: [
+          "A changed form of luciferin after the reaction occurs",
+          "The enzyme that starts the reaction",
+          "The oxygen gas before reacting",
+          "A type of predator attracted by light"
+        ],
+        answer: "A changed form of luciferin after the reaction occurs",
+      },
+      {
+        question: "Which situation would most likely favor communication over hunting as the main use of light?",
+        options: [
+          "Short patterned flashes between members of the same species",
+          "A glowing lure held near the mouth of a predator",
+          "Glowing sticky threads in a cave",
+          "A startled flash after a jellyfish is touched"
+        ],
+        answer: "Short patterned flashes between members of the same species",
+      },
+      {
+        question: "Why would changing the enzyme affect the color or efficiency of the glow?",
+        options: [
+          "The enzyme helps control how the chemical reaction happens",
+          "The enzyme is the same thing as the light itself",
+          "Enzymes remove all oxygen from the system",
+          "Enzymes only matter in daylight"
+        ],
+        answer: "The enzyme helps control how the chemical reaction happens",
+      },
+      {
+        question: "Which organism below is least likely to use bioluminescence mainly for mating signals?",
+        options: ["Angler Fish", "Firefly", "Some blinking insects", "Organisms using flash patterns"],
+        answer: "Angler Fish",
+      },
+      {
+        question: "Why is random blinking not as useful as a specific pattern for a firefly?",
+        options: [
+          "Patterns help members of the same species recognize one another",
+          "Random blinking creates more heat",
+          "Patterns use no oxygen",
+          "Random blinking prevents luciferase from working"
+        ],
+        answer: "Patterns help members of the same species recognize one another",
+      },
+      {
+        question: "If a glowworm stopped producing glowing threads but still glowed itself, what would most likely become less effective?",
+        options: [
+          "Its ability to lure insects into its trap",
+          "Its ability to photosynthesize",
+          "Its ability to swim quickly",
+          "Its ability to make oxygen"
+        ],
+        answer: "Its ability to lure insects into its trap",
+      },
+      {
+        question: "Which description best matches a defensive use of bioluminescence?",
+        options: [
+          "A sudden glow that startles, distracts, or redirects an attacker",
+          "A lure held in front of a predator's mouth",
+          "A repeating signal sent to a mate",
+          "A glow used to illuminate cave walls for navigation"
+        ],
+        answer: "A sudden glow that startles, distracts, or redirects an attacker",
+      },
+      {
+        question: "What would be the best evidence that a glowing behavior is used for prey capture?",
+        options: [
+          "Other organisms move toward the light and get trapped or eaten",
+          "The light appears only during courtship dances",
+          "The light occurs after the animal is touched by a predator",
+          "The glow happens only in full sunlight"
+        ],
+        answer: "Other organisms move toward the light and get trapped or eaten",
+      },
+      {
+        question: "Which factor most directly allows a website user to compare different glowing organisms in this project?",
+        options: [
+          "Switching between animals to match glow color, habitat, and purpose",
+          "Changing the temperature of the reaction",
+          "Removing oxygen from the page",
+          "Editing the font size"
+        ],
+        answer: "Switching between animals to match glow color, habitat, and purpose",
+      },
+      {
+        question: "Why might a scientist compare anglerfish and glowworms even though they live in different places?",
+        options: [
+          "Both use light to attract prey even though their habitats are different",
+          "Both rely on sunlight for their glow",
+          "Both use light only for mating",
+          "Both are mammals"
+        ],
+        answer: "Both use light to attract prey even though their habitats are different",
+      },
+      {
+        question: "Which change would most likely reduce a jellyfish's visible glow in seawater?",
+        options: [
+          "Reducing the chemical energy available for the reaction",
+          "Making the tentacles longer",
+          "Increasing the number of predators nearby",
+          "Moving it onto land for one second"
+        ],
+        answer: "Reducing the chemical energy available for the reaction",
+      },
+      {
+        question: "What is the main reason this project shows both reactants and products in the equation?",
+        options: [
+          "To show that chemicals are changed during the reaction that produces light",
+          "To prove all molecules stay exactly the same",
+          "To show that oxygen is not involved",
+          "To show that animals glow without chemistry"
+        ],
+        answer: "To show that chemicals are changed during the reaction that produces light",
+      },
+      {
+        question: "If two animals glow for different reasons, what does that suggest about evolution?",
+        options: [
+          "The same basic ability can be adapted for different survival needs",
+          "All glowing organisms are the same species",
+          "Bioluminescence has only one fixed purpose",
+          "Only ocean animals can evolve glowing traits"
+        ],
+        answer: "The same basic ability can be adapted for different survival needs",
+      },
     ];
 
     let selectedAnimalId = "anglerfish";
@@ -1661,6 +1876,7 @@
     let quizAnswered = false;
     let quizTimerValue = 20;
     let quizTimerInterval = null;
+    let activeQuizQuestions = [];
 
     function shuffleArray(items) {
       const copy = [...items];
@@ -1737,9 +1953,9 @@
     }
 
     function renderQuizQuestion() {
-      const current = quizQuestions[quizIndex];
+      const current = activeQuizQuestions[quizIndex];
       quizAnswered = false;
-      quizProgress.textContent = "Question " + (quizIndex + 1) + " of " + quizQuestions.length;
+      quizProgress.textContent = "Question " + (quizIndex + 1) + " of " + activeQuizQuestions.length;
       quizScore.textContent = "Score: " + quizScoreValue;
       quizQuestion.textContent = current.question;
       quizFeedback.textContent = "Choose the best answer.";
@@ -1815,13 +2031,13 @@
     }
 
     function goToNextQuestion() {
-      if (quizIndex < quizQuestions.length - 1) {
+      if (quizIndex < activeQuizQuestions.length - 1) {
         quizIndex += 1;
         renderQuizQuestion();
       } else {
         stopQuizTimer();
         quizProgress.textContent = "Finished";
-        quizQuestion.textContent = "Game complete. You scored " + quizScoreValue + " out of " + quizQuestions.length + ".";
+        quizQuestion.textContent = "Game complete. You scored " + quizScoreValue + " out of " + activeQuizQuestions.length + ".";
         quizFeedback.textContent = "Press Restart Game to play again.";
         quizOptions.innerHTML = "";
         quizNext.disabled = true;
@@ -1832,6 +2048,7 @@
     function restartQuiz() {
       quizIndex = 0;
       quizScoreValue = 0;
+      activeQuizQuestions = shuffleArray(quizQuestionBank).slice(0, 10);
       renderQuizQuestion();
     }
 
@@ -1847,6 +2064,11 @@
         if (!demo) return;
 
         image.addEventListener("error", () => {
+          const rootSrc = image.dataset.rootSrc;
+          if (rootSrc && image.src.indexOf(rootSrc) === -1) {
+            image.src = rootSrc;
+            return;
+          }
           demo.dataset.imageMissing = "true";
         });
 
@@ -1916,7 +2138,7 @@
     syncFocusMode();
     syncAutoPulse();
     wireImageFallbacks();
-    renderQuizQuestion();
+    restartQuiz();
   </script>
 </body>
 </html>
