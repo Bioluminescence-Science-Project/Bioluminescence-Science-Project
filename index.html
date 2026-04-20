@@ -364,6 +364,39 @@
       opacity: 1;
     }
 
+    .angler-demo,
+    .firefly-demo,
+    .jellyfish-demo,
+    .glowworm-demo {
+      --focus-x: 50%;
+      --focus-y: 50%;
+    }
+
+    .angler-demo { --focus-x: 15%; --focus-y: 32%; }
+    .firefly-demo { --focus-x: 50%; --focus-y: 73%; }
+    .jellyfish-demo { --focus-x: 50%; --focus-y: 34%; }
+    .glowworm-demo { --focus-x: 79%; --focus-y: 46%; }
+
+    .angler-demo::after,
+    .firefly-demo::after,
+    .jellyfish-demo::after,
+    .glowworm-demo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms ease;
+      background:
+        radial-gradient(circle at var(--focus-x) var(--focus-y),
+          rgba(255, 244, 188, 0) 0 4.5%,
+          rgba(255, 227, 108, 0.06) 6.5%,
+          rgba(2, 9, 14, 0.24) 13%,
+          rgba(2, 9, 14, 0.54) 25%,
+          rgba(2, 9, 14, 0.74) 46%);
+      z-index: 2;
+    }
+
     .specimen-svg {
       position: absolute;
       inset: 0;
@@ -381,31 +414,44 @@
 
     .specimen-photo {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
+      left: 50%;
+      top: 54%;
+      width: auto;
+      height: auto;
+      max-width: 88%;
+      max-height: 80%;
       filter: saturate(0.92) contrast(1.04) brightness(0.92);
-      transform: scale(1);
+      transform: translate(-50%, -50%) scale(1);
       transition: transform 220ms ease, filter 220ms ease;
     }
 
     .angler-demo .specimen-photo {
-      object-position: 50% 50%;
-      transform: scale(0.82);
+      left: 48%;
+      top: 55%;
+      max-width: 76%;
+      max-height: 66%;
+      transform: translate(-50%, -50%) scale(0.88);
     }
 
     .firefly-demo .specimen-photo {
-      object-position: 50% 50%;
-      transform: scale(0.8);
+      top: 54%;
+      max-width: 52%;
+      max-height: 68%;
+      transform: translate(-50%, -50%) scale(0.84);
     }
 
-    .jellyfish-demo .specimen-photo { object-position: 50% 50%; }
+    .jellyfish-demo .specimen-photo {
+      top: 52%;
+      max-width: 56%;
+      max-height: 84%;
+    }
 
     .glowworm-demo .specimen-photo {
-      object-position: 50% 50%;
-      transform: scale(0.82);
+      left: 47%;
+      top: 50%;
+      max-width: 66%;
+      max-height: 56%;
+      transform: translate(-50%, -50%) scale(0.84);
     }
 
     .image-fallback {
@@ -526,10 +572,10 @@
     }
 
     .angler-focus {
-      left: 18%;
-      top: 18%;
-      width: 62px;
-      height: 62px;
+      left: 11.5%;
+      top: 25.5%;
+      width: 46px;
+      height: 46px;
     }
 
     .magnifier-stage {
@@ -554,12 +600,12 @@
       filter: saturate(1.05) contrast(1.12) brightness(0.76);
     }
 
-    .hero-visual.focus-mode .active {
-      box-shadow: inset 0 0 0 999px rgba(2, 9, 14, 0.28);
+    .hero-visual.focus-mode .active::after {
+      opacity: 1;
     }
 
     .hero-visual.focus-mode .active .focus-target {
-      transform: scale(1.18);
+      transform: scale(1.12);
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.3), 0 0 42px rgba(255, 227, 108, 0.42), 0 0 74px rgba(111, 197, 255, 0.22);
     }
 
@@ -577,17 +623,7 @@
 
     .hero-visual.focus-mode .active .focus-halo {
       opacity: 1;
-      transform: scale(1.14);
-    }
-
-    .hero-visual.focus-mode .active .angler-focus,
-    .hero-visual.focus-mode .active .firefly-focus,
-    .hero-visual.focus-mode .active .jellyfish-focus,
-    .hero-visual.focus-mode .active .glowworm-focus {
-      box-shadow:
-        0 0 0 999px rgba(2, 9, 14, 0.18),
-        0 0 30px rgba(255, 227, 108, 0.4),
-        inset 0 0 26px rgba(255, 227, 108, 0.14);
+      transform: scale(1.08);
     }
 
     .hero-visual.focus-mode .magnifier-stage,
@@ -697,10 +733,10 @@
     }
 
     .firefly-focus {
-      left: 50%;
-      top: 51%;
-      width: 58px;
-      height: 58px;
+      left: 43.5%;
+      top: 67%;
+      width: 56px;
+      height: 56px;
     }
 
     .firefly-magnifier,
@@ -757,9 +793,9 @@
 
     .jellyfish-focus {
       left: 40%;
-      top: 28%;
-      width: 118px;
-      height: 118px;
+      top: 25%;
+      width: 96px;
+      height: 96px;
     }
 
     .jellyfish-tentacle {
@@ -809,10 +845,10 @@
     }
 
     .glowworm-focus {
-      left: 19%;
-      top: 41%;
-      width: 68px;
-      height: 68px;
+      left: 74%;
+      top: 40%;
+      width: 50px;
+      height: 50px;
     }
 
     .glow-thread {
