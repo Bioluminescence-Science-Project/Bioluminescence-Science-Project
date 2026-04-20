@@ -350,39 +350,6 @@
       opacity: 1;
     }
 
-    .angler-demo,
-    .firefly-demo,
-    .jellyfish-demo,
-    .glowworm-demo {
-      --focus-x: 50%;
-      --focus-y: 50%;
-    }
-
-    .angler-demo { --focus-x: 24%; --focus-y: 24%; }
-    .firefly-demo { --focus-x: 57%; --focus-y: 55%; }
-    .jellyfish-demo { --focus-x: 49%; --focus-y: 46%; }
-    .glowworm-demo { --focus-x: 26%; --focus-y: 50%; }
-
-    .angler-demo::before,
-    .firefly-demo::before,
-    .jellyfish-demo::before,
-    .glowworm-demo::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 220ms ease;
-      background:
-        radial-gradient(circle at var(--focus-x) var(--focus-y),
-          rgba(255, 244, 188, 0.03) 0 6%,
-          rgba(255, 227, 108, 0.12) 8%,
-          rgba(3, 16, 24, 0.08) 15%,
-          rgba(2, 10, 16, 0.56) 28%,
-          rgba(2, 8, 13, 0.76) 58%);
-      z-index: 1;
-    }
-
     .specimen-svg {
       position: absolute;
       inset: 0;
@@ -403,16 +370,15 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       object-position: center;
-      filter: saturate(0.9) contrast(1.04) brightness(0.9);
-      padding: 1rem 1rem 1.6rem;
+      filter: saturate(0.92) contrast(1.04) brightness(0.92);
     }
 
-    .angler-demo .specimen-photo { object-position: 42% 56%; }
-    .firefly-demo .specimen-photo { object-position: 50% 58%; }
-    .jellyfish-demo .specimen-photo { object-position: 50% 46%; }
-    .glowworm-demo .specimen-photo { object-position: 52% 48%; }
+    .angler-demo .specimen-photo { object-position: 46% 53%; }
+    .firefly-demo .specimen-photo { object-position: 50% 56%; }
+    .jellyfish-demo .specimen-photo { object-position: 50% 44%; }
+    .glowworm-demo .specimen-photo { object-position: 50% 46%; }
 
     .image-fallback {
       position: absolute;
@@ -532,10 +498,10 @@
     }
 
     .angler-focus {
-      left: 19%;
-      top: 17%;
-      width: 54px;
-      height: 54px;
+      left: 18%;
+      top: 18%;
+      width: 62px;
+      height: 62px;
     }
 
     .magnifier-stage {
@@ -557,11 +523,7 @@
     }
 
     .hero-visual.focus-mode .active .specimen-photo {
-      filter: saturate(1) contrast(1.08) brightness(0.94);
-    }
-
-    .hero-visual.focus-mode .active::before {
-      opacity: 1;
+      filter: saturate(1.02) contrast(1.1) brightness(0.78);
     }
 
     .hero-visual.focus-mode .active .focus-target {
@@ -583,7 +545,7 @@
 
     .hero-visual.focus-mode .active .focus-halo {
       opacity: 1;
-      transform: scale(1.08);
+      transform: scale(1.14);
     }
 
     .magnifier-stage::after {
@@ -685,10 +647,10 @@
     }
 
     .firefly-focus {
-      left: 52%;
-      top: 50%;
-      width: 52px;
-      height: 52px;
+      left: 50%;
+      top: 51%;
+      width: 58px;
+      height: 58px;
     }
 
     .firefly-magnifier,
@@ -744,10 +706,10 @@
     }
 
     .jellyfish-focus {
-      left: 42%;
-      top: 30%;
-      width: 110px;
-      height: 110px;
+      left: 40%;
+      top: 28%;
+      width: 118px;
+      height: 118px;
     }
 
     .jellyfish-tentacle {
@@ -797,10 +759,10 @@
     }
 
     .glowworm-focus {
-      left: 21%;
-      top: 42%;
-      width: 60px;
-      height: 60px;
+      left: 19%;
+      top: 41%;
+      width: 68px;
+      height: 68px;
     }
 
     .glow-thread {
@@ -852,6 +814,43 @@
       grid-template-columns: 0.95fr 1.2fr 0.95fr;
       gap: 1rem;
       margin-top: 1rem;
+    }
+
+    .overview-panel {
+      margin-top: 1rem;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .overview-card {
+      border-radius: 18px;
+      padding: 1rem;
+      background: rgba(3, 20, 29, 0.76);
+      border: 1px solid rgba(153, 236, 255, 0.14);
+    }
+
+    .overview-card h3 {
+      margin: 0 0 0.55rem;
+      font-size: 1rem;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .overview-card p {
+      margin: 0;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .overview-card ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      line-height: 1.55;
     }
 
     .panel {
@@ -1403,6 +1402,7 @@
     @media (max-width: 980px) {
       .hero, .content-grid { grid-template-columns: 1fr; }
       .hero-visual { min-height: 220px; }
+      .overview-grid { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 640px) {
@@ -1410,6 +1410,7 @@
       .hero, .panel { border-radius: 22px; padding: 1rem; }
       .fact-strip { grid-template-columns: 1fr; }
       .molecule, .reaction-arrow { min-width: 100%; }
+      .overview-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1420,7 +1421,9 @@
         <p class="eyebrow">GitHub Pages Science Project</p>
         <h1>Bioluminescence Explorer</h1>
         <p class="intro">
-          Watch how living things make light. Select an animal to see how
+          Watch how living things make light. Bioluminescence means
+          <span class="formula-inline">living light</span>, and it happens when animals use a
+          chemical reaction inside their bodies. Select an animal to see how
           <span class="formula-inline">luciferin + O2 + luciferase</span>
           can produce a glowing signal in the ocean, forest, or night sky.
         </p>
@@ -1433,10 +1436,10 @@
         </div>
         <div class="hero-demo">
           <button id="hero-animal-button" class="hero-animal" type="button">
-            <span class="hero-animal-label">Main Example</span>
+            <span class="hero-animal-label">Main Focus</span>
             <span id="hero-animal-name" class="hero-animal-name">Angler Fish</span>
             <span id="hero-animal-use" class="hero-animal-use">uses a glowing lure to attract prey</span>
-            <span id="hero-animal-hint" class="hero-animal-hint">Click to highlight the bioluminescent organ in this specimen view.</span>
+            <span id="hero-animal-hint" class="hero-animal-hint">Click to turn the focus highlight on for this specimen.</span>
           </button>
           <div class="magnifier-card">
             <div class="magnifier-copy">
@@ -1652,6 +1655,86 @@
         </div>
       </section>
     </main>
+
+    <section class="panel overview-panel">
+      <div class="panel-heading">
+        <p class="section-tag">Slide Notes</p>
+        <h2>Stuff From Our Slideshow</h2>
+      </div>
+      <div class="overview-grid">
+        <div class="overview-card">
+          <h3>What Are Some Things That Produce Light?</h3>
+          <p>
+            There are many different types of bioluminescent species. There are
+            ones above land, such as fireflies and millipedes. There are also
+            animals in the sea, where bioluminescence is much more common. These
+            include dragonfish, anglerfish, jellyfish, and the squid
+            <em>Octopoteuthis deletron</em>.
+          </p>
+        </div>
+        <div class="overview-card">
+          <h3>What Molecule Helps Animals Produce Light?</h3>
+          <p>
+            The molecule that helps animals produce light is luciferin. It helps
+            animals produce light by reacting with O2 and luciferase, which acts
+            as a catalyst, to create oxyluciferin and light.
+          </p>
+        </div>
+        <div class="overview-card">
+          <h3>What Is Visible Light?</h3>
+          <p>
+            Visible light is light that we can see. We see colors from light
+            reflecting off different objects. Some animals see different colors.
+            For example, birds and some insects see the sky as purple.
+          </p>
+        </div>
+        <div class="overview-card">
+          <h3>What Color Is Most Ocean Bioluminescence?</h3>
+          <p>
+            The color of most of the bioluminescent light produced in the ocean
+            is blue-green. This is because blue and green have shorter
+            wavelengths, which means they transmit more efficiently through
+            water.
+          </p>
+        </div>
+        <div class="overview-card">
+          <h3>What Are Some Of The Purposes?</h3>
+          <ul>
+            <li>It can help animals attract mates</li>
+            <li>It can help animals attract prey or food</li>
+            <li>It can be used as a defense mechanism against predators</li>
+          </ul>
+        </div>
+        <div class="overview-card">
+          <h3>What Does Bioluminescence Mean?</h3>
+          <p>
+            Bioluminescence means living light. The root <em>bio</em> means life,
+            and luminescence has to do with light being produced. Some similar
+            ideas are glowing, emitting light, or living light.
+          </p>
+        </div>
+        <div class="overview-card">
+          <h3>What Are The Reactants And Products?</h3>
+          <p>
+            The chemical reaction behind bioluminescence is based on luciferin
+            and O2. Mixed with the catalyst luciferase, they produce the
+            products oxyluciferin and light. Unlike sunlight and fire,
+            bioluminescence is not hot.
+          </p>
+        </div>
+        <div class="overview-card">
+          <h3>Final Explanation</h3>
+          <p>
+            Bioluminescence is one of the only ways natural light is created on
+            our planet, and most people have never heard of it. Instead of being
+            hot, there is a chemical reaction inside animals that causes them to
+            emit light. Fireflies light up to find a mate, anglerfish lure prey
+            in with their light, and some jellyfish light up as a warning or
+            distraction.
+          </p>
+        </div>
+      </div>
+    </section>
   </div>
   <script>
     const animals = [
@@ -1668,7 +1751,7 @@
         wavelengthLabel: "Yellow-green glow",
         wavelengthPosition: "78%",
         wavelengthExplanation: "Firefly light is usually around yellow-green wavelengths, which stand out well at night and are easy for other fireflies to notice.",
-        wavelengthAdvantage: "That color works well for signaling in air, especially for short coded flashes used during mate-finding.",
+        wavelengthAdvantage: "That color works well for signaling in air, especially for short coded flashes used during mate-finding and species recognition.",
       },
       {
         id: "anglerfish",
@@ -1698,7 +1781,7 @@
         wavelengthLabel: "Cyan-blue glow",
         wavelengthPosition: "30%",
         wavelengthExplanation: "Jellyfish often emit cyan or blue light because those wavelengths show up clearly in ocean water.",
-        wavelengthAdvantage: "That makes the glow useful for startling predators, creating distraction, or signaling trouble in dark water.",
+        wavelengthAdvantage: "That makes the glow useful for startling predators, creating distraction, or warning nearby animals in dark water.",
       },
       {
         id: "glowworm",
@@ -2099,8 +2182,8 @@
       heroAnimalName.textContent = animal.name;
       heroAnimalUse.textContent = animal.purpose.replace("Why it glows: ", "");
       heroAnimalHint.textContent = focusMode
-        ? "Highlighted organ view is on. Click again to return to the full specimen."
-        : "Click to highlight the bioluminescent organ in this specimen view.";
+        ? "Main focus is on. Click again to return to the full specimen."
+        : "Click to turn the focus highlight on for this specimen.";
       reactionCaption.textContent = animal.caption;
       wavelengthTitle.textContent = animal.name + ": why this glow color?";
       wavelengthColorLabel.textContent = animal.wavelengthLabel;
